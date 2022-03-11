@@ -1,10 +1,10 @@
 import React , {useState} from "react"
-import { View, TextInput, Button, StyleSheet } from "react-native"
+import { View, TextInput, Button, StyleSheet , Modal} from "react-native"
 
 
 const InputComponent = (props) => {
+  console.log(props.visible);
 
- 
   const [newTodo,setNewTodo]= useState('');
 
   const handleChange = (text) => {
@@ -16,23 +16,33 @@ const InputComponent = (props) => {
   }
 
   return (
-    <View style={styles.card}>
-      <TextInput
-        placeholder='Write here'
-        style={styles.textInput}
-        onChangeText={handleChange}
-      />
-      
-      <Button title='Add' onPress={handlePress}/>
-    </View>
+    <Modal 
+      visible={props.visible}
+      animationType='slide'
+      style={styles.modal}>
+      <View 
+        style={styles.container}>
+        <TextInput
+          placeholder='Write here'
+          style={styles.textInput}
+          onChangeText={handleChange}
+        />
+        <Button title='Add' onPress={handlePress}/>
+      </View>
+    </Modal>
   )
 }
 
 
 const styles = StyleSheet.create({
-  card: {
-    justifyContent: "space-between",
-    flexDirection: "row",
+  modal:{
+    marginTop:40,
+  },
+
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems:"center",
     backgroundColor: "white",
     borderRadius: 10,
     marginVertical: 20,

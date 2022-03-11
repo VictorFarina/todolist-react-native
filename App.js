@@ -5,13 +5,16 @@ import InputComponent from "./components/input/InputComponent";
 import {
   StyleSheet,
   View,
-  FlatList
+  FlatList,
+  Button
 } from "react-native";
 
 export default function App() {
-
+  
   const [ todoList, setTodoList ]= useState([]);
 
+  const [ pressed, setPressed ] = useState(false);
+  
   const addTodo = (input) => { 
    setTodoList([...todoList,{
     key:Math.random(),
@@ -23,14 +26,15 @@ export default function App() {
 
     <View style={styles.screen}>
 
-        <InputComponent addTodo={addTodo}/> 
+        <Button title="Add todo" onPress={ () => setPressed(!pressed)} />
+
+        <InputComponent visible={pressed} addTodo={addTodo}/> 
 
         <FlatList 
           data={todoList} 
           renderItem={ itemData => (
             <ListItem itemData={itemData}/>
           )}/>
-        
     </View>
 
   )
