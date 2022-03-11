@@ -23,7 +23,7 @@ const ListItem = (props) => {
       onPress={handlePress}>
       <Text style={styles.text}>{props.itemData.item.title}</Text>
       <Text style={styles.text}>{props.itemData.item.key}</Text>
-      <Button style={styles.delButton} title='DELETE' onPress={handleDelete}/>
+      <Button style={styles.delButton} color="blue" title='DELETE' onPress={handleDelete}/>
 
   
 

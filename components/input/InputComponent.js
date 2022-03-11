@@ -2,13 +2,21 @@ import React , {useState} from "react"
 import { View, TextInput, Button, StyleSheet , Modal} from "react-native"
 
 const InputComponent = (props) => {
+
+  
   const [newTodo,setNewTodo]= useState('');
+  const [error,setError]= useState(false);
+
   const handleChange = (text) => {
     setNewTodo(text);
   }
   
   const handleAdd = () => {
-    props.addTodo(newTodo);
+    if(newTodo.length==0){
+     setError(true);
+    }else{
+        props.addTodo(newTodo);
+    }
   }
 
   const handleCancel = () => {
@@ -23,10 +31,11 @@ const InputComponent = (props) => {
       style={styles.modal}>
 
       <View 
-        style={styles.container}>
+        style={styles.container} >
         <TextInput
-          placeholder='Write here'
-          style={styles.textInput}
+          placeholder={!error ? 'Write here' : 'You have to writee something'}
+          style={[styles.textInput,
+          error ? styles.inputError  : '' ]}
           onChangeText={handleChange}
         />
         <View style={styles.btnContainer}>
@@ -73,7 +82,13 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
 
+  },
+  inputError:{
+    borderWidth:2,
+    borderColor:'red'
+
   }
+
 })
 
 export default InputComponent
