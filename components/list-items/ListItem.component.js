@@ -1,12 +1,17 @@
-import React, { useState } from "react"
-import { StyleSheet, Text, Button, Pressable } from "react-native"
+import React, { useState } from "react";
+import { StyleSheet, Text, Button, Pressable } from "react-native";
 
-const ListItem = ({ itemData }) => {
+const ListItem = (props) => {
+
+
+
   const [pressed, setPressed] = useState(false)
 
   const handlePress = () => {
     setPressed(!pressed)
-    console.log(pressed)
+  }
+  const handleDelete = () => {
+   props.deleteTodo(props.itemData.item.key)
   }
 
   return (
@@ -16,9 +21,12 @@ const ListItem = ({ itemData }) => {
         pressed ? styles.bgBabyBlue : styles.bgAliceBlue,
       ]}
       onPress={handlePress}>
-      <Text style={styles.text}>{itemData.item.title}</Text>
-      <Text style={styles.text}>{itemData.item.key}</Text>
-      <Button style={styles.delButton} title='Xx-xx-xx' />
+      <Text style={styles.text}>{props.itemData.item.title}</Text>
+      <Text style={styles.text}>{props.itemData.item.key}</Text>
+      <Button style={styles.delButton} title='DELETE' onPress={handleDelete}/>
+
+  
+
     </Pressable>
   )
 }

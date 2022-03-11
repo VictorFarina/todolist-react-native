@@ -1,25 +1,27 @@
 import React , {useState} from "react"
 import { View, TextInput, Button, StyleSheet , Modal} from "react-native"
 
-
 const InputComponent = (props) => {
-  console.log(props.visible);
-
   const [newTodo,setNewTodo]= useState('');
-
   const handleChange = (text) => {
     setNewTodo(text);
   }
-   
-  const handlePress = () => {
+  
+  const handleAdd = () => {
     props.addTodo(newTodo);
   }
+
+  const handleCancel = () => {
+    props.cancelTodo();
+  }
+  
 
   return (
     <Modal 
       visible={props.visible}
       animationType='slide'
       style={styles.modal}>
+
       <View 
         style={styles.container}>
         <TextInput
@@ -27,32 +29,51 @@ const InputComponent = (props) => {
           style={styles.textInput}
           onChangeText={handleChange}
         />
-        <Button title='Add' onPress={handlePress}/>
+        <View style={styles.btnContainer}>
+          <Button 
+            title='Cancel' 
+            color='red' 
+            onPress={handleCancel}/>
+          <Button 
+            title='ADD' 
+            onPress={handleAdd}/>
+        </View>
+
       </View>
+
     </Modal>
   )
 }
 
-
 const styles = StyleSheet.create({
   modal:{
-    marginTop:40,
+    marginTop:200,
   },
 
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems:"center",
-    backgroundColor: "white",
+    backgroundColor: "#F0F8FF",
     borderRadius: 10,
-    marginVertical: 20,
     borderColor: "black",
     borderWidth: 0.1,
   },
   textInput: {
+    backgroundColor: "white",
     padding: 9,
-    marginLeft: 3,
+
+    borderRadius:20,
+    height: 60,
+    width: 300,
   },
+  btnContainer: {
+    padding:30,
+    width: 300,
+    flexDirection:'row',
+    justifyContent:'space-between',
+
+  }
 })
 
 export default InputComponent
