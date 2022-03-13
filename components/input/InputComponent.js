@@ -20,6 +20,7 @@ const InputComponent = (props) => {
   }
 
   const handleCancel = () => {
+     setError(false);
     props.cancelTodo();
   }
   
@@ -33,7 +34,7 @@ const InputComponent = (props) => {
       <View 
         style={styles.container} >
         <TextInput
-          placeholder={!error ? 'Write here' : 'You have to writee something'}
+          placeholder={!error ? 'Write here' : 'You have to write something'}
           style={[styles.textInput,
           error ? styles.inputError  : '' ]}
           onChangeText={handleChange}

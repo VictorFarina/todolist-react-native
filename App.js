@@ -29,7 +29,6 @@ export default function App() {
     <View style={styles.screen}>
       <View style={styles.btnContainer}>
         <Button
-          
           title='Add todo'
           onPress={() => setPressed(true)}
         />
